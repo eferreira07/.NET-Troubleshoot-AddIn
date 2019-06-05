@@ -3,7 +3,7 @@ The “Troubleshoot Add-In Sample Code” was created to automatically capture i
 
 This sample code is started by receiving ServerConfigProperty from the TroubleshootStatusBarAddIn.cs followed by two methods (1) to define where the results will be saved and (2) to start the windows standard application to capture steps to reproduce.
 
- 
+```C#
 
 public StatusBarControl(IGlobalContext globalContext, bool isOscInfo, bool isScreenCap, 
         string tspath, int reminderInMinutes, string initialNotification, string finalNotificaiton)
@@ -80,11 +80,11 @@ private static void TroubleshootDirectory()
         }
 }
 
- 
+```
 
 The sample code is centralizing all actions to start the external application in a single method. As now, it is loading only PSR, but you can add Fiddler as described before and also make it an option trought ServerConfigProperty.
 
- 
+```C#
 
 private void LoadTroubleshoot()
 {
@@ -102,11 +102,11 @@ private void LoadTroubleshoot()
         }
 }
  
+```
 
 The following method is called to start Windows PSR.
 
- 
-
+```C#
 private void StartPsr()
 {
         try
@@ -123,10 +123,11 @@ private void StartPsr()
                 GContext.LogMessage(e.Message);
         }
 }
- 
+```
 
 The following two methods are generic, so you can reuse that for other applications if it is needed. These methods are used to start and stop Windows PSR in this context.
 
+```C#
 private static void TryKillProcess(string processName)
 {
         var processes = Process.GetProcessesByName(processName);
@@ -157,10 +158,11 @@ private static Process InvokeProcess(string processName, string parameters)
 
         return proc;
 }
- 
+``` 
 
 The following method will take care of the time control, plus will control the duration. It will remind the agent that the capture is still running in case the agent has accidentally forgotten to stop.
 
+```C#
 private void timer1_Tick_1(object sender, EventArgs e)
 {
         if (_isActive)
@@ -223,10 +225,11 @@ private static string AppendZero(double str)
                 return "0" + str;
         return str.ToString(CultureInfo.CurrentCulture);
 }
- 
+```
 
 When the Stop button is clicked the following method is called.
 
+```C#
 private void btnStop_Click(object sender, EventArgs e)
 {
         try
@@ -244,10 +247,11 @@ private void btnStop_Click(object sender, EventArgs e)
                 GContext.LogMessage(ex.Message);
         }            
 }      
- 
+```
 
 Similar to the logic applied to the start load, here the sequence to stop the applications running will take place.
 
+```C#
 private void StopTroubleshoot()
 {
         try
@@ -285,9 +289,12 @@ private void StopTroubleshoot()
                 GContext.LogMessage(e.Message);
         }
 }
- 
+
+```
+
 The generic kill and invoke method will be called again to stop Windows PSR.
 
+```C#
 private void StopPsr()
 {
         try
@@ -308,12 +315,11 @@ private void StopPsr()
                 GContext.LogMessage(e.Message);
         }
 }
- 
+``` 
 
 If the ServerConfigProperty that allows OSCInfo.bat file runs has not been defined as True, this piece of code will collect at least the basic workstation information.
 
- 
-
+ ```C#
 private static void WorkStationInfo()
 {
         try
@@ -378,10 +384,11 @@ private static string CheckFor45PlusVersion(int releaseKey)
                 return "4.5.1";
         return releaseKey >= 378389 ? "4.5" : "No 4.5 or later version detected";
 }
- 
+```
 
 Otherwise, the OSCInfo.bat file is extracted and will run using the agent session information, without to fill out information in the bat file.
 
+```C#
 private static void ExtractEmbeddedResource(string nameSpace, string outDirectory, string internalFilePath, string resourceName)
 {
         try
@@ -427,10 +434,11 @@ private static void RunOsvCInfo()
                 MessageBox.Show(e.Message);
         }
 }
- 
+```
 
 Finally, the information is compressed and the result location will be shown to the agent.
 
+```C#
 private static void CompressAndNotify()
 {
         try
@@ -451,6 +459,6 @@ private static void CompressAndNotify()
                 MessageBox.Show(e.Message);
         }
 }
- 
+```
 
 Leave a comment and let us know what you think, or if you have questions. We’d also love to hear other ways that you’ve simplified or improved troubleshooting agent issues.
