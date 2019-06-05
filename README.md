@@ -1,0 +1,2 @@
+# .NET-Troubleshoot-AddIn
+The “Troubleshoot Add-In Sample Code” was created to automatically capture information, such as steps-to-reproduce, and workstation information in one fell swoop instead of requiring agents to install or use different tools outside of Oracle Service Cloud. All that agents need to do is push the "start" button (located in the status bar) and push the “stop” when the agents have completed all steps to reproduce the error.
