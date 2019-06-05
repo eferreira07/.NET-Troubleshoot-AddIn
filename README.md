@@ -461,4 +461,3 @@ private static void CompressAndNotify()
 }
 ```
 
-Leave a comment and let us know what you think, or if you have questions. We’d also love to hear other ways that you’ve simplified or improved troubleshooting agent issues.
